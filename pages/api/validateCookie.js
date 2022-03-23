@@ -21,10 +21,10 @@ export default async function handler(req, res) {
       } else {
         const qref = await getDoc(doc(db, "users", body.LoginId));
         if (qref._document != null) {
-          console.log("checks out");
+          console.log("API validate cookie -> checks out");
           result.status = true;
         } else {
-          console.log("DOESNT check out");
+          console.log("API validate cookie -> DOESNT check out");
           result.status = false;
         }
       }

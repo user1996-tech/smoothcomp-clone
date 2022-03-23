@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import FlagDropDownMenu from "./FlagDropDownMenu";
 
-const InputFieldPhone = ({ initialValue, register, registerId }) => {
+const InputFieldPhone = ({ register, registerId, setValue }) => {
   // [areaCode, number] = initialValue
-  const [value, setValue] = useState(initialValue[1]);
-  const [areaCodeValue, setAreaCodeValue] = useState(initialValue[0]);
   const [data, setData] = useState([]);
   const [focus, setFocus] = useState(false);
 
@@ -33,10 +31,8 @@ const InputFieldPhone = ({ initialValue, register, registerId }) => {
         >
           <FlagDropDownMenu
             options={data}
-            selected=""
             register={register}
-            state={areaCodeValue}
-            setState={setAreaCodeValue}
+            setValue={setValue}
           />
           <input
             onFocus={() => setFocus(true)}
@@ -44,20 +40,17 @@ const InputFieldPhone = ({ initialValue, register, registerId }) => {
             className="flex-1 px-3 flex mr-10 outline-none"
             type="tel"
             placeholder="050 123 4567"
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-            }}
+            {...register(registerId)}
           />
         </div>
 
         <p className="text-gray-500 text-xs">Please enter your mobile number</p>
         <p className="text-gray-500 text-xs">Ex. 050 123 4567</p>
-        <input
+        {/* <input
           {...register(registerId)}
           hidden
-          value={[areaCodeValue, value]}
-        />
+          // value={[areaCodeValue, value]}
+        /> */}
       </div>
     </div>
   );

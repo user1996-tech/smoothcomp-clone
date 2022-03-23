@@ -4,7 +4,7 @@ import InputFieldTextArea from "./InputFieldTextArea";
 import InputFieldText from "./InputFieldText";
 import InputFieldSelectNationality from "./InputFieldSelectNationality";
 
-const ContactResidence = ({ register }) => {
+const ContactResidence = ({ register, setValue }) => {
   return (
     <div className="">
       <div className={`px-10 py-3 rounded-t-md bg-xgrey2`}>
@@ -14,7 +14,7 @@ const ContactResidence = ({ register }) => {
         <InputFieldPhone
           register={register}
           registerId="PhoneNumber"
-          initialValue={["", ""]}
+          setValue={setValue}
         />
 
         <InputFieldTextArea
@@ -40,7 +40,6 @@ const ContactResidence = ({ register }) => {
 
         <InputFieldSelectNationality
           label="Country of residence"
-          initialValue={"ARE"}
           register={register}
           registerId={"CountryOfResidence"}
         />

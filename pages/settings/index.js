@@ -7,67 +7,42 @@ import InitScript from "../../components/InitScript";
 import Selector from "../../components/UserPage/Selector";
 import { useRouter } from "next/router";
 import Title from "../../components/SettingsPage/Title";
-import UserDetails from "../../components/SettingsPage/UserDetails";
-import { useForm } from "react-hook-form";
-import ContactResidence from "../../components/SettingsPage/ContactResidence";
-import PublicProfile from "../../components/SettingsPage/PublicProfile";
-import ProfileImage from "../../components/SettingsPage/ProfileImage";
-import CoverImage from "../../components/SettingsPage/CoverImage";
-import BeltLevel from "../../components/SettingsPage/BeltLevel";
-import DeleteAccount from "../../components/SettingsPage/DeleteAccount";
 import YourAcademies from "../../components/SettingsPage/YourAcademies";
 import JoinAcademy from "../../components/SettingsPage/JoinAcademy";
 import LinkedAccounts from "../../components/SettingsPage/LinkedAccounts";
 import { loginState } from "../../recoil";
+import { userDataState } from "../../recoil";
 import { useRecoilState } from "recoil";
 import { useThemeWithoutDefault } from "@mui/system";
+import Form from "../../components/SettingsPage/Form";
+import { ThreeDots } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const index = () => {
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState(undefined);
+  const [userData, setUserData] = useRecoilState(userDataState);
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-    setValue,
-    reset,
-  } = useForm({
-    shouldFocusError: false,
-    defaultValues: {
-      // FirstName: "Austin test",
-      // MiddleName: "",
-      // LastName: "Lohx",
-      // Password: "hiddenpassword",
-      // ...userData,
-    },
-  });
   const [loginId, setLoginId] = useRecoilState(loginState);
-  const onSubmit = async (data) => {
-    console.log(getValues());
-    await fetch(`${global.apiAddress}/updateProfile`, {
-      method: "POST",
-      mode: "cors",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...data,
-        LoginId: loginId,
-      }),
-    })
-      .then((data) => data.json())
-      .then((result) => {});
-  };
 
   useEffect(() => {
     checkLoggedIn(setLoginId);
   });
 
   useEffect(() => {
+    if (Object.keys(router.query).length != 0) {
+      if (router.query.type == "error") {
+        toast.error(router.query.message);
+      } else {
+        toast.success(router.query.message);
+      }
+    }
+  }, [router.query]);
+
+  useEffect(() => {
     (async () => {
       const response = await getUserData(loginId);
+      setUserData(response);
     })();
   }, [loginId]);
   return (
@@ -84,48 +59,14 @@ const index = () => {
           <Title />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 gap-y-[100px]">
-            {/* User Details */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-                <UserDetails register={register} setValue={setValue} />
-
-                {/* Contact & residence */}
-                <ContactResidence register={register} />
-
-                {/* Public Profile */}
-                <PublicProfile
-                  register={register}
-                  registerId="PublicProfile"
-                  initialValue={true}
-                />
-
-                {/* Profile Image */}
-                <ProfileImage
-                  register={register}
-                  registerId="ProfileImage"
-                  initialValue=""
-                />
-
-                {/* Cover Image */}
-                <CoverImage
-                  register={register}
-                  registerId="CoverImage"
-                  initialValue=""
-                />
-
-                {/* Belt / Skill levels */}
-                <BeltLevel />
-
-                {/* Delete Account */}
-                <DeleteAccount />
-
-                <button
-                  className="bg-xgreen text-white text-lg font-semibold my-3 p-3 rounded-md"
-                  type="submit"
-                >
-                  Save changes
-                </button>
-              </form>
+              {userData == undefined ? (
+                <div className="flex items-center justify-center border-slate-500 rounded-md border py-[200px]">
+                  <ThreeDots color="grey" className="" height={50} width={50} />
+                </div>
+              ) : (
+                <Form userData={userData} />
+              )}
             </div>
 
             <div className="space-y-8">
@@ -142,6 +83,17 @@ const index = () => {
         </div>
       </div>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

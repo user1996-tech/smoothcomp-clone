@@ -9,7 +9,7 @@ const DropDownButton = ({ title, options, alone = false }) => {
 
   return (
     <div className="relative text-white text-sm hover:bg-black">
-      <div
+      <button
         onClick={handleClick}
         className={`flex h-full items-center px-5 ${
           status ? "bg-gray-900" : "bg-transparent"
@@ -17,7 +17,7 @@ const DropDownButton = ({ title, options, alone = false }) => {
       >
         <h1>{title}</h1>
         {!alone && <ChevronDown className="h-5 w-7" />}
-      </div>
+      </button>
 
       {status && !alone && (
         <div className="absolute z-10 top-[100%] left-0 w-[200px] bg-gray-900">

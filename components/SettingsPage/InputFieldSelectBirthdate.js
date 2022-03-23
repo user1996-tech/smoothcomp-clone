@@ -44,8 +44,7 @@ const InputFieldSelectBirthdate = ({
         {/* Day */}
         <select
           className="w-full md:w-[30%]  rounded-md border-2 p-1"
-          value={dayValue}
-          onChange={(e) => setDayValue(e.target.value)}
+          {...register("BirthdateDay")}
         >
           <option value="">Day</option>
           {optionsDay.map((day, index) => (
@@ -58,8 +57,7 @@ const InputFieldSelectBirthdate = ({
         {/* Month */}
         <select
           className="w-full md:w-[30%] rounded-md border-2 p-1"
-          value={monthValue}
-          onChange={(e) => setMonthValue(e.target.value)}
+          {...register("BirthdateMonth")}
         >
           <option value="">Month</option>
           {optionsMonth.map((month, index) => (
@@ -72,8 +70,7 @@ const InputFieldSelectBirthdate = ({
         {/* Year */}
         <select
           className="w-full md:w-[30%] rounded-md border-2 p-1"
-          value={yearValue}
-          onChange={(e) => setYearValue(e.target.value)}
+          {...register("BirthdateYear")}
         >
           <option value="">Year</option>
           {optionsYear.map((year, index) => (
@@ -83,11 +80,6 @@ const InputFieldSelectBirthdate = ({
           ))}
         </select>
       </div>
-      <input
-        hidden
-        {...register(registerId)}
-        value={[dayValue, monthValue, yearValue]}
-      />
     </div>
   );
 };

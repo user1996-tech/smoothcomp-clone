@@ -76,12 +76,12 @@ const DropDownMenu = () => {
   };
   return (
     <div className="relative z-50">
-      <div
+      <button
         className="px-5 h-10 flex items-center hover:bg-black"
         onClick={handleClick}
       >
         <MenuIcon className="h-5 w-5 text-white" />
-      </div>
+      </button>
 
       {status && (
         <div className="absolute top-10 right-0 w-screen bg-gray-900 ">
@@ -139,15 +139,18 @@ const DropDownMenu = () => {
             )}
           </div>
 
-          {options2.map((group) => {
+          {options2.map((group, index) => {
             return (
-              <div>
+              <div key={index}>
                 <div className="uppercase w-full h-10 font-bold text-sm bg-gray-700 flex items-center px-10 mt-3 text-gray-500">
                   {group.title}
                 </div>
                 <div className="divide-y divide-slate-500 border-[1px] border-slate-500">
-                  {group.options.map((option) => (
-                    <button className="text-white w-full h-10 bg flex items-center px-10 hover:bg-black">
+                  {group.options.map((option, index) => (
+                    <button
+                      className="text-white w-full h-10 bg flex items-center px-10 hover:bg-black"
+                      key={index}
+                    >
                       {option.title}
                     </button>
                   ))}

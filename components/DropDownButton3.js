@@ -37,26 +37,27 @@ const DropDownButton3 = () => {
   };
   return (
     <div className="relative">
-      <div
+      <button
         className="px-5 h-10 flex items-center hover:bg-black"
         onClick={() => {
           setStatus(!status);
         }}
       >
         <ReactCountryFlag countryCode={selected} svg />
-      </div>
+      </button>
 
       {status && (
         <div className="absolute z-10 top-10 right-0 w-[200px] bg-gray-900">
-          {options.map((option) => (
+          {options.map((option, index) => (
             <div
+              key={index}
               className="h-10 flex items-center hover:bg-black px-5 justify-between"
               onClick={() => handleClick(option.flags[0])}
             >
               <h1 className="text-white">{option.languange}</h1>
               <div className="space-x-2">
                 {option.flags.map((flag) => (
-                  <ReactCountryFlag countryCode={flag} svg />
+                  <ReactCountryFlag key={flag} countryCode={flag} svg />
                 ))}
               </div>
             </div>

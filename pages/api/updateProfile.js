@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           if (qref._document != null) {
             setDoc(docRef, body, { merge: true });
             result.status = "success";
-            result.message = "";
+            result.message = "User details have been updated";
           } else {
             (result.status = "error"), (result.message = "Account error");
           }

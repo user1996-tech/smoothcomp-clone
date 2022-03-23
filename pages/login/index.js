@@ -42,7 +42,7 @@ const index = () => {
           reset();
           setErrorMessage("");
           setLoginId(result.loginId);
-          setCookie("loginId", result.loginId);
+          setCookie("loginId", result.loginId, 10);
           router.push("/");
         } else {
           reset();

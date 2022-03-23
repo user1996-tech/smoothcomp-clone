@@ -28,8 +28,9 @@ const For = () => {
       <div
         className={`grid grid-cols-1 md:grid-cols-3 divide-y divide-slate-500 md:divide-y-0 md:divide-x max-w-5xl px-0 md:px-10  md:mx-auto border-x-0 md:border-x border-slate-500`}
       >
-        {options.map((option) => (
+        {options.map((option, index) => (
           <div
+            key={index}
             className={`text-white flex flex-col items-center justify-center py-8 px-10`}
           >
             {option.icon()}

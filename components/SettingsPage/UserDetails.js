@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { global } from "../../global";
 import InputField from "./InputField";
 import InputFieldPassword from "./InputFieldPassword";
@@ -7,7 +7,7 @@ import InputFieldSelectBirthdate from "./InputFieldSelectBirthdate";
 import InputFieldSelectGender from "./InputFieldSelectGender";
 import InputFieldSelectLanguage from "./InputFieldSelectLanguage";
 
-const UserDetails = ({ register, setValue }) => {
+const UserDetails = ({ register }) => {
   return (
     <div className="">
       <div className={`px-10 py-3 rounded-t-md bg-xgrey2`}>User details</div>
@@ -40,7 +40,6 @@ const UserDetails = ({ register, setValue }) => {
 
         <InputFieldSelectNationality
           label="Nationality"
-          initialValue={""}
           register={register}
           registerId={"Nationality"}
         />
@@ -54,14 +53,12 @@ const UserDetails = ({ register, setValue }) => {
 
         <InputFieldSelectGender
           label="Gender"
-          initialValue={""}
           register={register}
           registerId={"Gender"}
         />
 
         <InputFieldSelectLanguage
           label="Language"
-          initialValue={""}
           register={register}
           registerId={"Language"}
         />

@@ -7,7 +7,8 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useRecoilState } from "recoil";
 import { loginState } from "../recoil";
 import { useRouter } from "next/router";
-import { global, logout } from "../global";
+import { global } from "../global";
+import { logout } from "../public/global";
 
 const DropDownButton2 = () => {
   const [status, setStatus] = useState(false);
@@ -37,7 +38,7 @@ const DropDownButton2 = () => {
         </div>
       ) : (
         <>
-          <div
+          <button
             onClick={handleClick}
             className={`flex h-full items-center px-5 hover:bg-gray-900 ${
               status ? "bg-gray-900" : "bg-transparent"
@@ -46,29 +47,34 @@ const DropDownButton2 = () => {
             <AccountCircleIcon className="mr-2" />
             <h1>Austin</h1>
             <ChevronDownIcon className="h-5 w-7" />
-          </div>
+          </button>
 
           {status && (
             <div className="absolute z-10 top-10 left-0 w-[200px] bg-gray-900">
-              <div className="h-10 flex items-center hover:bg-black pl-5">
+              <button className="h-10 flex items-center hover:bg-black pl-5 w-full">
                 <AccountCircleIcon className="mr-2" />
                 <h1>Austin Loh</h1>
-              </div>
-              <div className="h-10 flex items-center hover:bg-black pl-5">
+              </button>
+              <button className="h-10 flex items-center hover:bg-black pl-5 w-full">
                 <PersonIcon className="mr-2" />
                 <h1>My account</h1>
-              </div>
-              <div className="h-10 flex items-center hover:bg-black pl-5">
+              </button>
+              <button
+                className="h-10 flex items-center hover:bg-black pl-5 w-full"
+                onClick={() => {
+                  router.push("/settings");
+                }}
+              >
                 <SettingsIcon className="mr-2" />
                 <h1>Settings</h1>
-              </div>
-              <div
-                className="h-10 flex items-center hover:bg-black pl-5"
+              </button>
+              <button
+                className="h-10 flex items-center hover:bg-black pl-5 w-full"
                 onClick={() => logout(router, setLoginId)}
               >
                 <ChevronRightIcon className="mr-2" />
                 <h1>Log out</h1>
-              </div>
+              </button>
 
               <div className="h-10 flex items-center text-gray-500 mt-3 pl-5">
                 <h1 className="uppercase">linked profiles</h1>

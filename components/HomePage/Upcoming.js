@@ -43,8 +43,8 @@ const Upcoming = () => {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {options.map((option) => (
-            <div className="">
+          {options.map((option, index) => (
+            <div className="" key={index}>
               <div className="relative">
                 <img
                   src={option.image}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Header from "../components/Header";
@@ -6,9 +7,14 @@ import Footer from "../components/HomePage/Footer";
 import { loginState } from "../recoil";
 import { useRecoilState } from "recoil";
 import { global } from "../global";
+import { checkLoggedIn } from "../public/global";
 
 export default function Home() {
   const [loginId, setLoginId] = useRecoilState(loginState);
+
+  useEffect(() => {
+    checkLoggedIn(setLoginId);
+  }, []);
 
   return (
     <>
@@ -20,9 +26,9 @@ export default function Home() {
 
       <Header />
 
-      <body className={`bg-[${global.colors.primary}] min-h-screen`}>
+      <div className={`bg-[${global.colors.primary}] min-h-screen`}>
         <Body />
-      </body>
+      </div>
       <Footer />
     </>
   );

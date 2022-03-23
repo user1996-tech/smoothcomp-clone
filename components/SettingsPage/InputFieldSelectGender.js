@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const options = ["Male", "Female"];
 
-const InputFieldSelectGender = ({
-  label = "",
-  initialValue = "",
-  register,
-  registerId,
-}) => {
+const InputFieldSelectGender = ({ label = "", register, registerId }) => {
   return (
     <div className="py-2 px-10 border-b border-slate-300 grid grid-cols-1 md:grid-cols-4">
       <div className="flex-1 items-center flex">
@@ -17,7 +12,6 @@ const InputFieldSelectGender = ({
         <select
           className="w-full rounded-md border-2 p-1"
           {...register(registerId)}
-          defaultValue={initialValue}
         >
           <option value="">Select gender</option>
           {options.map((option, index) => (

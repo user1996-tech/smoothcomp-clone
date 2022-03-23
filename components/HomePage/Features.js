@@ -38,8 +38,8 @@ const Features = () => {
       <div className="flex flex-col items-center">
         {/* Mobile Verion */}
         <div className="max-w-5xl mx-auto y-10 space-y-[70px] my-5 block md:hidden">
-          {options.map((option) => (
-            <div className="flex flex-col items-center space-y-4">
+          {options.map((option, index) => (
+            <div className="flex flex-col items-center space-y-4" key={index}>
               <img
                 src={option.image}
                 alt=""
@@ -63,6 +63,7 @@ const Features = () => {
             return (
               <div
                 className={`flex w-[600px] lg:w-[700px] bg-[${global.colors.fourth}]`}
+                key={index}
               >
                 <div
                   className={`flex-1 flex justify-end ${

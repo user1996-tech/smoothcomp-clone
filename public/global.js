@@ -51,7 +51,7 @@ const checkLoggedIn = async (setLoginId) => {
       .then((result) => {
         if (result.status) {
           setLoginId(loginIdCookie);
-          setCookie("loginId", loginIdCookie);
+          setCookie("loginId", loginIdCookie, 10);
         } else {
           removeCookie("loginId");
           setLoginId(null);
@@ -77,9 +77,6 @@ const getUserData = async (loginId) => {
       .then((result) => {
         return result;
       });
-  } else {
-    //will run once
-    console.log("no data to get");
   }
 };
 

@@ -24,13 +24,16 @@ const ProfileImage = ({ register, registerId, initialValue }) => {
         <input
           hidden
           type="file"
+          name="ProfileImage"
+          // ref={register()}
           ref={filePickerRef}
+          // {...register(registerId)}
           onChange={(e) => handleImage(e)}
-          {...register(registerId)}
         />
         <button
           className={`bg-xblue text-white py-1 px-2 text-sm rounded-md font-semibold`}
           onClick={() => filePickerRef.current.click()}
+          type="button"
         >
           Select image
         </button>
